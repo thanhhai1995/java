@@ -1,0 +1,174 @@
+package com.example.gamedemo;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    CheckBox checkBox1;
+    CheckBox checkBox2;
+    CheckBox checkBox3;
+    CheckBox checkBox4;
+    SeekBar seekBar;
+    SeekBar seekBar1;
+    SeekBar seekBar2;
+    SeekBar seekBar3;
+    Button button;
+    TextView textView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Anhxa();
+        final CountDownTimer count = new CountDownTimer(10000, 500) {
+            @Override
+            public void onTick(long l) {
+                Random random = new Random();
+                int number = 20;
+                int number1 = 10;
+
+                int mot = random.nextInt(number);
+                int hai = random.nextInt(number1);
+                int ba = random.nextInt(number1);
+                int bon = random.nextInt(number1);
+
+                if(seekBar.getProgress() >= seekBar.getMax())
+                {
+                    this.cancel();
+                    button.setVisibility(View.VISIBLE);
+                    if(checkBox1.isChecked())
+                    {
+                        textView.setText("Bạn Chọn Đúng");
+                    }
+                    else{
+                        textView.setText("Bạn Chọn Sai");
+                    }
+
+                }
+                if(seekBar1.getProgress() >= seekBar1.getMax())
+                {
+                    this.cancel();
+                    button.setVisibility(View.VISIBLE);
+                    if(checkBox2.isChecked())
+                    {
+                        textView.setText("Bạn Chọn Đúng");
+                    }
+                    else{
+                        textView.setText("Bạn Chọn Sai");
+                    }
+                }
+                if(seekBar2.getProgress() >= seekBar2.getMax())
+                {
+                    this.cancel();
+                    button.setVisibility(View.VISIBLE);
+                    if(checkBox3.isChecked())
+                    {
+                        textView.setText("Bạn Chọn Đúng");
+                    }
+                    else{
+                        textView.setText("Bạn Chọn Sai");
+                    }
+                }
+                if(seekBar3.getProgress() >= seekBar3.getMax())
+                {
+                    this.cancel();
+                    button.setVisibility(View.VISIBLE);
+                    if(checkBox4.isChecked())
+                    {
+                        textView.setText("Bạn Chọn Đúng");
+                    }
+                    else{
+                        textView.setText("Bạn Chọn Sai");
+                    }
+                }
+
+                seekBar.setProgress(seekBar.getProgress() + mot );
+                seekBar1.setProgress(seekBar1.getProgress()+ hai );
+                seekBar2.setProgress(seekBar2.getProgress() + ba );
+                seekBar3.setProgress(seekBar3.getProgress() + bon);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                seekBar.setProgress(0);
+                seekBar1.setProgress(0);
+                seekBar2.setProgress(0);
+                seekBar3.setProgress(0);
+
+                button.setVisibility(View.INVISIBLE);
+
+                count.start();
+            }
+        });
+        checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                    checkBox4.setChecked(false);
+                }
+            }
+        });
+        checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    checkBox1.setChecked(false);
+                    checkBox3.setChecked(false);
+                    checkBox4.setChecked(false);
+                }
+            }
+        });
+        checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox4.setChecked(false);
+                }
+            }
+        });
+        checkBox4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                }
+            }
+        });
+    }
+    private void Anhxa() {
+        seekBar = (SeekBar)findViewById(R.id.seekBar1);
+        seekBar1 = (SeekBar)findViewById(R.id.seekBar2);
+        seekBar2 = (SeekBar)findViewById(R.id.seekBar3);
+        seekBar3  = (SeekBar)findViewById(R.id.seekBar4);
+        button = (Button)findViewById(R.id.button);
+        textView = (TextView)findViewById(R.id.textView);
+        checkBox1 = (CheckBox)findViewById(R.id.checkBox1);
+        checkBox2 = (CheckBox)findViewById(R.id.checkBox2);
+        checkBox3 = (CheckBox)findViewById(R.id.checkBox3);
+        checkBox4 = (CheckBox)findViewById(R.id.checkBox4);
+    }
+}
